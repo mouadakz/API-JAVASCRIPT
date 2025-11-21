@@ -33,11 +33,7 @@ function display(data) {
     `;
 
     card.addEventListener('click', () => {
-      localStorage.setItem('selectedCountry', JSON.stringify(p));
-
-      let utter = new SpeechSynthesisUtterance(p.name);
-      utter.lang = 'eng';
-      speechSynthesis.speak(utter);
+      localStorage.setItem('selectedCountry', JSON.stringify(p))
 
       window.location.href = 'country-details.html?id=' + p.id;
     });
@@ -59,4 +55,5 @@ filter.addEventListener('change', () => {
 
 
 fetcha();
+
 
