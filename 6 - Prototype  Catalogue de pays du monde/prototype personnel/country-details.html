@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Country Details</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      background: #f5f5f5;
+      text-align: center;
+    }
+
+    a {
+      display: inline-block;
+      margin-bottom: 15px;
+      padding: 6px 12px;
+      background: #3498db;
+      color: #fff;
+      text-decoration: none;
+      border-radius: 4px;
+    }
+    a:hover {
+      background: #2980b9;
+    }
+
+    img {
+      width: 180px;
+      height: auto;
+      margin-bottom: 10px;
+    }
+
+    p {
+      margin: 5px 0;
+      font-size: 16px;
+    }
+  </style>
+</head>
+<body>
+
+  <a href="index.html" id="back-btn">Back </a>
+
+  <div id="details"></div>
+
+  <script>
+    const detailsDiv = document.getElementById('details');
+
+    const params = new URLSearchParams(window.location.search);
+    const id = params.get('id');
+
+    const countries = JSON.parse(localStorage.getItem('countriesList')) || [];
+    const country = countries.find(c => c.id == id) || null;
+
+    if (country) {
+      detailsDiv.innerHTML = `
+        <div id="details-card">
+          <h2>${country.name}</h2>
+          <img src="${country.flag}" alt="Flag of ${country.name}">
+          <div class="info">
+            <p><strong>Capital:</strong> ${country.capital}</p>
+            <p><strong>Continent:</strong> ${country.continent}</p>
+            <p><strong>Language:</strong> ${country.language}</p>
+            <p><strong>Population:</strong> ${country.population}</p>
+            <p><strong>Area:</strong> ${country.area} km²</p>
+            <p><strong>Currency:</strong> ${country.currency}</p>
+          </div>
+        </div>
+      `;
+    } else {
+      detailsDiv.innerHTML = "<p>No data</p>";
+    }
+  </script>
+
+</body>
+</html>
